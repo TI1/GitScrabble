@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+        @Styles.Render("~/Content/css/game.css")
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                To learn more about ASP.NET MVC visit
+                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
+                If you have any questions about ASP.NET MVC visit
+                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
+            </p>
+        </div>
+    </section>
+}
+
+<!DOCTYPE HTML>
+<div class="tableDivWrap surroundShade">
+    <table>
+         <tbody>
+             @for(int x = 1; x <= 15; x++ ){
+                 <tr>
+                     @for(int y = 1; y <= 15; y++ ){
+                         var a = x.ToString() + y.ToString();
+                         if ((x == 1 || x == 15 || x == 8)
+		                    && (y == 1 || y == 15 || y == 8)) {
+			                     <td class="TripleWord">
+                                    <div  id="@a" class="Empty ui-droppable" ondragover="event.preventDefault()" ondrop="dropWord(event)">
+                                        <a><span>3xC</span></a>
+                                    </div>
+                                 </td>
+	                        } 
+		                    else if (x == 8 && y == 8
+				                    || x > 1 && x < 6 && (y == x || y == 16 - x)
+		                           || x > 10 && x < 15 && (x == y || x == 16 - y)) {
+			                     <td class="DoubleWord">
+                                    <div  id="@a" class="Empty ui-droppable" ondragover="event.preventDefault()" ondrop="dropWord(event)">
+                                        <a><span>2xC</span></a>
+                                    </div>
+                                 </td>
+                            //if (x == 7 && y == 7) {
+                            //    centerStart
+                            //}
+	                        } else if ((x == 7 || x == 9)
+		                           && (y == 7 || y == 9)
+		                           || (x == 1 || x == 15 || x == 8) && (y == 12 || y == 4)
+		                           || (y == 1 || y == 15 || y == 8) && (x == 12 || x == 4)
+		                           || (y == 9 || y == 7) && (x == 13 || x == 3)
+		                           || (x == 9 || x == 7) && (y == 13 || y == 3)) {
+			                     <td class="DoubleLetter" >
+                                    <div  id="@a" class="Empty ui-droppable" ondragover="event.preventDefault()" ondrop="dropWord(event)">
+                                        <a><span>2L</span></a>
+                                    </div>
+                                 </td>
+	                        } else if ((x == 6 || x == 10)
+		                           && (y == 6 || y == 10)
+		                           || (y == 10 || y == 6) && (x == 14 || x == 2)
+		                           || (x == 10 || x == 6) && (y == 14 || y == 2)) {
+			                     <td class="TripleLetter">
+                                    <div  id="@a" class="Empty ui-droppable" ondragover="event.preventDefault()" ondrop="dropWord(event)">
+                                        <a><span>3L</span></a>
+                                    </div>
+                                 </td>
+	                        }
+                            else{                            
+			                     <td class="Normal">
+                                    <div  id="@a" class="Empty ui-droppable" ondragover="event.preventDefault()" ondrop="dropWord(event)"></div>
+                                 </td>
+                            }
+                     }
+                 </tr>
+             }
+         </tbody>
+     </table>
+</div>
